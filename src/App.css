@@ -1,0 +1,39 @@
+
+.strike {
+  text-decoration: line-through;
+}
+.App {
+  text-align: center;
+}
+ .App {
+  border: 2px black solid;
+  border-radius: 10px;
+  margin: 30px;  
+  font-family:sans-serif;
+  background-image: linear-gradient(to right, rgba(255,0,0,0), rgb(198, 32, 32));
+
+}
+.Todof {
+  border: 0px;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 20px;
+  background-color: rgba(58, 215, 76, 0.753);
+}
+.header {
+  border: 10px solid;
+  border-image: linear-gradient(45deg, purple, orange) 2;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 20px;
+}
+.w-25 {
+  width: 30%!important;
+  margin: 20px;
+  padding: 6px;
+  border-radius: 10px;
+} 
+input {
+  border: 2px black solid;
+  border-radius: 10px;
+}

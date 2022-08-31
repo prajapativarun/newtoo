@@ -1,0 +1,68 @@
+import React, { useState } from 'react'
+import './App.css';
+// import data from './data.json'; //   Create mock data to test application
+import ToDoList from './Components/ToDoList';
+
+function App() {
+  const [ toDoList, setToDoList ] = useState([]);
+  const [ userInput, setUserInput ] = useState((JSON.parse(localStorage.getItem("")) || []));
+
+  const handleToggle = (id) => {
+    let mapped = toDoList?.map(task => {
+      // eslint-disable-next-line eqeqeq
+      return task.id == id ? {...task, complete: !task.complete} : {...task};
+    });
+    setToDoList(mapped);
+  }
+
+  const handleFilter = () => {
+    let filtered = toDoList.filter(task => {
+      return !task.complete;
+    });
+    setToDoList(filtered);
+  }
+
+  const addTask = (userInput ) => {
+    let copy = [...toDoList];
+    copy = [...copy, { id: toDoList.length + 1, task: userInput, complete: false }];
+    // localStorage.getItem("",JSON.stringify([...userInput]))
+    setToDoList(copy);
+  }
+
+  const handleChange = (e) => {
+    setUserInput(e.currentTarget.value)
+  }
+
+  const handleSubmit = (e) => {
+      e.preventDefault();
+      console.log("task",userInput.length)
+      const Validation = /^[^-\s][a-zA-Z0-9_\s-]*$/;
+      if(Validation.test(userInput)){
+      addTask(userInput);
+      setUserInput("");
+      // LocalStorage
+      localStorage.setItem("",JSON.stringify([userInput]))
+      }
+  }
+
+  return (
+    <div className='bg'>
+      <div className="App">
+        <div className='header'>
+          <header>
+            <h1>To Do List</h1>
+          </header>
+        </div>
+        <div>
+          <form onSubmit={handleSubmit}>
+            <input value={userInput} type="text" onChange={handleChange} placeholder="Enter task..." maxLength={20}  />
+            <button style={{margin: '10px', border: '0px blue solid' , borderRadius: '10px',backgroundColor:'#024488'}}>Submit</button>
+          </form>
+        </div>
+        <ToDoList toDoList={toDoList} handleToggle={handleToggle} handleFilter={handleFilter} />
+      </div>
+    </div>
+  );
+};
+
+export default App;
